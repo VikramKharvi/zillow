@@ -1,0 +1,67 @@
+GOAL:
+Analyze the provided images of a property and provide a comprehensive assessment across multiple dimensions. Rate each dimension on a 1-5 scale and provide specific explanations based solely on visual evidence. Rate the property across these key dimensions:
+
+**EXTERIOR & CURB APPEAL:**
+1. **Landscaping & Yard** (1-5): Assess lawn condition, garden maintenance, trees, walkways, and overall outdoor aesthetics
+   - 1 = Overgrown/Neglected, poor maintenance
+   - 5 = Manicured/Pristine, excellent landscaping
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+2. **Facade Condition** (1-5): Evaluate siding, paint, brick, or external materials for damage, wear, or aesthetic appeal
+   - 1 = Major repairs needed, significant damage
+   - 5 = Excellent condition, well-maintained
+   - 0 = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+3. **Roof Condition** (1-5): Visual assessment for missing shingles, sagging, aging, or obvious structural issues
+   - 1 = Major visible damage/concerns
+   - 5 = Appears new/excellent condition
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+**INTERIOR CONDITION & QUALITY:**
+4. **Natural Light** (1-5): Amount of sunlight and brightness in living spaces, bedrooms, bathrooms, etc.
+   - 1 = Dark/Few windows, poor lighting
+   - 5 = Bright/Abundant natural light
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+5. **Flooring Condition** (1-5): State of carpets, hardwood, tiles, etc.
+   - 1 = Needs replacement, significant damage
+   - 5 = New/Perfect condition
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+6. **Wall & Ceiling Condition** (1-5): Check for cracks, water stains, scuff marks, paint quality
+   - 1 = Major issues, needs significant work
+   - 5 = Pristine condition
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+7. **Spaciousness** (1-5): Overall sense of space and room layout
+   - 1 = Cramped, poor layout
+   - 5 = Very spacious, excellent flow
+   - NA = Not Applicable (If there is no image or the quality and angle of the image makes it impossible to assess)
+
+GUIDELINES:
+- Output a single, valid JSON object.
+- The JSON object must be the *only* thing in the final output block. Do not wrap it in markdown backticks or include any other text.
+- Keys and structure must exactly match the schema shown in the example.
+- If scoring is applicable then it must be integers from 1 to 5, else choose "NA".
+- If you can't find images to score a certain dimension, for example, 1) There aren't any interior images, 2) No images of interior walls, 3) Poor quality shots; then in such cases use "NA", and highlight these issues in your cons.
+- Include at least two relevant pros and two cons based on the visual evidence.
+- Calculate `average_score` as the arithmetic mean of all non-zero scores, rounded to two decimal places.
+
+Example format:
+{
+  "exterior_curb_appeal": {
+    "landscaping_yard": {"explanation": "Well-maintained lawn with...", "score": 4},
+    "facade_condition": {"explanation": "Siding shows minor wear...", "score": 3},
+    "roof_condition": {"explanation": "Roof appears new...", "score": 5}
+  },
+  "interior_condition": {
+    "natural_light": {"explanation": "Large windows provide...", "score": 4},
+    "flooring_condition": {"explanation": "Hardwood floors show...", "score": 3},
+    "wall_ceiling_condition": {"explanation": "Walls appear freshly painted...", "score": 5},
+    "spaciousness": {"explanation": "Rooms have adequate space...", "score": 3}
+  },
+  "overall_summary": "Brief overall assessment...",
+  "pros": ["point 1", "point 2"],
+  "cons": ["point 1", "point 2"],
+  "average_score": 3.85
+}
